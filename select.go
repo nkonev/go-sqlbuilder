@@ -219,6 +219,12 @@ func (sb *SelectBuilder) BuilderAs(builder Builder, alias string) string {
 	return fmt.Sprintf("(%s) AS %s", sb.Var(builder), alias)
 }
 
+// BuilderAs returns an alias expression wrapping a complex SQL.
+// According to SQL syntax, SQL built by builder is surrounded by parens.
+func (sb *SelectBuilder) Parens(builder Builder, alias string) string {
+	return fmt.Sprintf("(%s) %s", sb.Var(builder), alias)
+}
+
 // NumCol returns the number of columns to select.
 func (sb *SelectBuilder) NumCol() int {
 	return len(sb.selectCols)
